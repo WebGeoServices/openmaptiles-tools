@@ -6,7 +6,8 @@ networks:
 
 services:
   postgres:
-    image: openmaptiles/postgis:latest
+    build:
+      context: ../../docker/postgis
     ports:
       - "5432"
     env_file: test.env

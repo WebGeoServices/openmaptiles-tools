@@ -2,7 +2,7 @@
 # the postgis base image has outdated ogr2ogr (gdal-bin package)
 # does not support PG12 yet, which means postgis-preloaded cannot be built easily.
 # Once it is updated, or there is a different way to build it, we can upgrade to 12.
-ARG BASE_POSTGIS_VER=9.6-3.1
+ARG BASE_POSTGIS_VER=13-3.1
 FROM postgis/postgis:$BASE_POSTGIS_VER
 
 LABEL maintainer="Yuri Astrakhan <YuriAstrakhan@gmail.com>"
@@ -15,7 +15,7 @@ ARG PGSQL_GZIP_TAG=v1.0.0
 ARG PGSQL_GZIP_REPO=https://github.com/pramsey/pgsql-gzip.git
 
 # https://github.com/JuliaLang/utf8proc/releases
-ARG UTF8PROC_TAG=v2.5.0
+ARG UTF8PROC_TAG=v2.6.1
 ARG UTF8PROC_REPO=https://github.com/JuliaLang/utf8proc.git
 
 # osml10n - https://github.com/giggls/mapnik-german-l10n/releases
@@ -39,7 +39,7 @@ RUN set -eux  ;\
         libkakasi2-dev \
         libgdal-dev \
     ;\
-    ## Install specific GEOS version 
+    ## Install specific GEOS version
     cd /opt/  ;\
     curl -o /opt/geos.tar.bz2 http://download.osgeo.org/geos/geos-${GEOS_VER}.tar.bz2  ;\
     mkdir /opt/geos  ;\

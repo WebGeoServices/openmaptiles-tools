@@ -20,7 +20,7 @@ DOCKER_BUILD_EXTRAS ?=
 WORKDIR      ?= $$( pwd -P )
 RUN_CMD := docker run ${DOCKER_OPTS} -v "$(WORKDIR):/tileset"
 
-DIFF_CMD := diff --brief --recursive --new-file
+DIFF_CMD := diff --brief -b --recursive --new-file
 EXPECTED_DIR := tests/expected
 
 # Export image name so that tests/sql/docker-compose.yml can use it
@@ -103,7 +103,7 @@ build-sql-tests: prepare build-docker
 	@echo "   Running Postgres SQL tests"
 	@echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 	docker-compose --file tests/sql/docker-compose.yml rm -f && \
-	timeout 60 docker-compose --file tests/sql/docker-compose.yml up --abort-on-container-exit && \
+	docker-compose --file tests/sql/docker-compose.yml up --abort-on-container-exit && \
 	docker-compose --file tests/sql/docker-compose.yml rm -f
 
 .PHONY: build-bin-tests
